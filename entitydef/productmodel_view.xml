@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/entitymodel.xsd">
+
+    <view-entity entity-name="FindProductView"
+                 package-name="org.apache.ofbiz.product.view"
+                 title="Find Product View Entity">
+
+        <member-entity entity-alias="P" entity-name="Product"/>
+        <member-entity entity-alias="PC" entity-name="ProductCategory"/>
+        <member-entity entity-alias="PCM" entity-name="ProductCategoryMember"/>
+        <member-entity entity-alias="PP" entity-name="ProductPrice"/>
+        <member-entity entity-alias="PF" entity-name="ProductFeature"/>
+        <member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"/>
+
+        <alias entity-alias="P" name="productId" field="productId"/>
+        <alias entity-alias="P" name="productName" field="productName"/>
+
+        <alias entity-alias="PP" name="listPrice" field="price"/>
+        <alias entity-alias="PP" name="currencyUomId" field="currencyUomId"/>
+
+        <alias entity-alias="PC" name="productCategoryId" field="productCategoryId"/>
+        <alias entity-alias="PC" name="categoryName" field="categoryName"/>
+
+        <alias entity-alias="PF" name="productFeatureId" field="productFeatureId"/>
+        <alias entity-alias="PF" name="description" field="description"/>
+
+        <view-link entity-alias="P" rel-entity-alias="PCM">
+            <key-map field-name="productId"/>
+        </view-link>
+
+        <view-link entity-alias="PCM" rel-entity-alias="PC">
+            <key-map field-name="productCategoryId"/>
+        </view-link>
+
+        <view-link entity-alias="P" rel-entity-alias="PP">
+            <key-map field-name="productId"/>
+        </view-link>
+
+        <view-link entity-alias="P" rel-entity-alias="PFA">
+            <key-map field-name="productId"/>
+        </view-link>
+
+        <view-link entity-alias="PFA" rel-entity-alias="PF">
+            <key-map field-name="productFeatureId"/>
+        </view-link>
+
+
+    </view-entity>
+
+</entitymodel>
+
+
+

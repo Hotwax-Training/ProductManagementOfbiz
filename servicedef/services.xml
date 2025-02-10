@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
+    <description>Product management Services</description>
+
+    <service name="findProduct"
+             engine="java"
+             location="org.apache.ofbiz.product.ProductServices"
+             invoke="findProduct"
+             auth="true"
+             export="true">
+
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="minPrice" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="maxPrice" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="productFeature" type="String" mode="IN" optional="true"/>
+
+        <attribute name="products" type="List" mode="OUT"/>
+    </service>
+
+    <service name="createProduct"
+             engine="java"
+             location="org.apache.ofbiz.product.ProductServices"
+             invoke="createProduct"
+             auth="true"
+             export="true">
+        <attribute name="productName" type="String" mode="IN" optional="false"/>
+        <attribute name="categoryId" type="String" mode="IN" optional="false"/>
+        <attribute name="listPrice" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="OUT"/>
+    </service>
+
+
+</services>
