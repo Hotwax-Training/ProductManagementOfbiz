@@ -7,29 +7,65 @@
              engine="java"
              location="org.apache.ofbiz.product.ProductServices"
              invoke="findProduct"
-             auth="true"
              export="true">
-
+        <description>FInd Products</description>
         <attribute name="productId" type="String" mode="IN" optional="true"/>
         <attribute name="productName" type="String" mode="IN" optional="true"/>
         <attribute name="minPrice" type="BigDecimal" mode="IN" optional="true"/>
         <attribute name="maxPrice" type="BigDecimal" mode="IN" optional="true"/>
         <attribute name="productFeature" type="String" mode="IN" optional="true"/>
-
         <attribute name="products" type="List" mode="OUT"/>
     </service>
 
+
     <service name="createProduct"
+             default-entity-name="Product"
              engine="java"
              location="org.apache.ofbiz.product.ProductServices"
-             invoke="createProduct"
-             auth="true"
-             export="true">
+             invoke="createProduct">
+        <description>Create a new product in the system</description>
         <attribute name="productName" type="String" mode="IN" optional="false"/>
         <attribute name="categoryId" type="String" mode="IN" optional="false"/>
-        <attribute name="listPrice" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="isVirtual" type="String" mode="IN" optional="false"/>
         <attribute name="productId" type="String" mode="OUT"/>
     </service>
 
+    <service name="updateProduct"
+             engine="java"
+             location="org.apache.ofbiz.product.ProductServices"
+             invoke="updateProduct">
+        <description>Update product details including price and features</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="newPrice" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="productFeatureDescription" type="String" mode="IN" optional="true"/>
+        <attribute name="updatedProduct" type="Map" mode="OUT" optional="false"/>
+        <attribute name="message" type="String" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="assocProductToVirtual"
+             engine="java"
+             location="org.apache.ofbiz.product.ProductServices"
+             invoke="assocProductToVirtual"
+             auth="true">
+        <description>Associate a product with a virtual product as a variant</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="virtualProductId" type="String" mode="IN" optional="false"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="message" type="String" mode="OUT"/>
+    </service>
+
+    <service name="updateProductVariant"
+             engine="java"
+             location="org.apache.ofbiz.product.ProductServices"
+             invoke="updateProductVariant"
+             auth="true">
+        <description>Update an existing variant relationship between a virtual product and a variant</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/> <!-- Variant Product -->
+        <attribute name="virtualProductId" type="String" mode="IN" optional="false"/>
+        <attribute name="newVirtualProductId" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/> <!-- New From Date -->
+        <attribute name="message" type="String" mode="OUT"/> <!-- Output message -->
+    </service>
 
 </services>
