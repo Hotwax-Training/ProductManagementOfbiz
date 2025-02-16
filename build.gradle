@@ -18,8 +18,6 @@
  */
 
 dependencies {
-    //Examples of compile-time and runtime dependencies
-
     //pluginLibsCompile 'junit:junit-dep:4.10'
     //pluginLibsRuntime 'junit:junit-dep:4.10'
 }
